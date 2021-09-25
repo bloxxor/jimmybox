@@ -41,7 +41,7 @@ Vagrant.configure("2") do |config|
     ############################################################################
 
     # DEFAULT:
-    config.vm.synced_folder "./public", "/var/www", :mount_options => ["dmode=755", "fmode=644"]
+    config.vm.synced_folder "./public", "/var/www", :mount_options => ["dmode=777", "fmode=777"]
 
     # NFS:
     # you should try NFS share - it performs much better than the default synced folder!
