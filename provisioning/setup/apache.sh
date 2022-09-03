@@ -10,13 +10,16 @@ sudo cp /usr/local/vagrant/hosts/* /etc/apache2/sites-available/
 
 # enable the default hosts
 # sudo a2ensite 00*.conf
+# sudo a2ensite 000-default.conf
 
-# myproject.com
+sudo a2dissite 000-default.conf
+
+# keystone-immosearch.test
 # -------------------
-if [ -d "/var/www/myproject.com/" ]; then
-   sudo a2ensite 100-myproject.conf
+if [ -d "/var/www/keystone-immosearch.test/" ]; then
+   sudo a2ensite 100-keystone-immosearch.conf
 else
-   sudo a2dissite 100-myproject.conf
+   sudo a2dissite 100-keystone-immosearch.conf
 fi
 
 # restart apache

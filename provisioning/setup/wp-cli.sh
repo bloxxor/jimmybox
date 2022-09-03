@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # Set output text color variables
-green='\033[0;31m'
+green='\033[0;32m'
 red='\033[0;31m'
 nc='\033[0m' # No Color
 
