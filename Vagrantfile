@@ -33,21 +33,21 @@ Vagrant.configure("2") do |config|
     # Public network:
     # uncomment the lines and add your own config (bridge, ip, etc.)
 
-#     config.vm.network "public_network",
-#     :bridge => "en0: WLAN (Airport)",
-#     ip: "192.168.10.201", :netmask => "255.255.255.0", auto_config: true
+    # config.vm.network "public_network",
+    # :bridge => "en0: WLAN (Airport)",
+    # ip: "192.168.10.201", :netmask => "255.255.255.0", auto_config: true
 
     # SYNCED FOLDERS
     ############################################################################
 
     # DEFAULT:
-#     config.vm.synced_folder "./public", "/var/www", :mount_options => ["dmode=777", "fmode=777"]
+    config.vm.synced_folder "./public", "/var/www", :mount_options => ["dmode=777", "fmode=777"]
 
     # NFS:
     # you should try NFS share - it performs much better than the default synced folder!
-    config.vm.synced_folder "./public", "/var/www", :nfs => { :mount_options => ["dmode=777","fmode=777"] }
+    # config.vm.synced_folder "./public", "/var/www", :nfs => { :mount_options => ["dmode=777","fmode=777"] }
 
-    # NFS in MacOS 10.15 Catalina:
+    # NFS in MacOS 10.15 Catalina and higher:
     # due to a bug in Catalina you should use an absolute path to your directory:
     # config.vm.synced_folder "/Volumes/Macintosh HD/Users/your-user/Vagrant/jimmybox/public", "/var/www", type: 'nfs', mount_options: ['rw', 'vers=3', 'tcp', 'fsc' ,'actimeo=1']
 
@@ -68,10 +68,16 @@ Vagrant.configure("2") do |config|
     # SSL Certificates
     config.vm.provision "file", source: "./provisioning/ssl", destination: "/usr/local/vagrant/"
 
+    # php.ini configs
+    config.vm.provision "file", source: "./provisioning/php.ini", destination: "/usr/local/vagrant/"
+
+    # Execute Updates
+    # config.vm.provision "shell", path: "./provisioning/setup/updates.sh"
+
     # Execute the apache setup scripts
     config.vm.provision "shell", path: "./provisioning/setup/apache.sh"
 
-    # Execute php Setups
+    # php.ini files
     config.vm.provision "shell", path: "./provisioning/setup/php.sh"
 
     # Setup MailHog
